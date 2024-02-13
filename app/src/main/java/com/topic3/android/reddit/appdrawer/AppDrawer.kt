@@ -10,7 +10,9 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
@@ -40,8 +42,8 @@ fun AppDrawer(
 ) {
   Column(
     modifier = modifier
-      .fillMaxSize()
-      .background(color = MaterialTheme.colors.surface)
+        .fillMaxSize()
+        .background(color = MaterialTheme.colors.surface)
   ) {
     AppDrawerHeader()
 
@@ -64,8 +66,8 @@ private fun AppDrawerHeader() {
       imageVector = Icons.Filled.AccountCircle,
       colorFilter = ColorFilter.tint(Color.LightGray),
       modifier = Modifier
-        .padding(16.dp)
-        .size(50.dp),
+          .padding(16.dp)
+          .size(50.dp),
       contentScale = ContentScale.Fit,
       alignment = Alignment.Center,
       contentDescription = stringResource(id = R.string.account)
@@ -87,8 +89,8 @@ private fun AppDrawerHeader() {
 fun ProfileInfo(modifier: Modifier = Modifier) {
   ConstraintLayout(
     modifier = modifier
-      .fillMaxWidth()
-      .padding(top = 16.dp)
+        .fillMaxWidth()
+        .padding(top = 16.dp)
   ) {
     val (karmaItem, divider, ageItem) = createRefs()
     val colors = MaterialTheme.colors
@@ -104,12 +106,12 @@ fun ProfileInfo(modifier: Modifier = Modifier) {
     )
     Divider(
       modifier = modifier
-        .width(1.dp)
-        .constrainAs(divider) {
-          centerVerticallyTo(karmaItem)
-          centerHorizontallyTo(parent)
-          height = Dimension.fillToConstraints
-        },
+          .width(1.dp)
+          .constrainAs(divider) {
+              centerVerticallyTo(karmaItem)
+              centerHorizontallyTo(parent)
+              height = Dimension.fillToConstraints
+          },
       color = colors.onSurface.copy(alpha = .2f)
     )
     ProfileInfoItem(Icons.Filled.ShoppingCart,
@@ -141,35 +143,35 @@ private fun ProfileInfoItem(
       imageVector = iconAsset,
       tint = Color.Blue,
       modifier = itemModifier
-        .constrainAs(iconRef) {
-          centerVerticallyTo(parent)
-          start.linkTo(parent.start)
-        }
-        .padding(start = 16.dp)
+          .constrainAs(iconRef) {
+              centerVerticallyTo(parent)
+              start.linkTo(parent.start)
+          }
+          .padding(start = 16.dp)
     )
     Text(
       text = stringResource(amountResourceId),
       color = colors.primaryVariant,
       fontSize = 10.sp,
       modifier = itemModifier
-        .padding(start = 8.dp)
-        .constrainAs(amountRef) {
-          top.linkTo(iconRef.top)
-          start.linkTo(iconRef.end)
-          bottom.linkTo(titleRef.top)
-        }
+          .padding(start = 8.dp)
+          .constrainAs(amountRef) {
+              top.linkTo(iconRef.top)
+              start.linkTo(iconRef.end)
+              bottom.linkTo(titleRef.top)
+          }
     )
     Text(
       text = stringResource(textResourceId),
       color = Color.Gray,
       fontSize = 10.sp,
       modifier = itemModifier
-        .padding(start = 8.dp)
-        .constrainAs(titleRef) {
-          top.linkTo(amountRef.bottom)
-          start.linkTo(iconRef.end)
-          bottom.linkTo(iconRef.bottom)
-        }
+          .padding(start = 8.dp)
+          .constrainAs(titleRef) {
+              top.linkTo(amountRef.bottom)
+              start.linkTo(iconRef.end)
+              bottom.linkTo(iconRef.bottom)
+          }
     )
   }
 }
@@ -181,7 +183,22 @@ private fun ProfileInfoItem(
  */
 @Composable
 private fun AppDrawerBody(closeDrawerAction: () -> Unit) {
-  //TODO add your code here
+  Column {
+      ScreenNavigationButton(
+          icon = Icons.Filled.AccountBox,
+          label = stringResource(R.string.my_profile),
+          onClickAction = {
+              closeDrawerAction()
+          }
+      )
+      ScreenNavigationButton(
+          icon = Icons.Filled.Home,
+          label = stringResource(R.string.saved),
+              onClickAction = {
+                  closeDrawerAction()
+              }
+          )
+  }
 }
 
 /**
@@ -197,8 +214,8 @@ private fun ScreenNavigationButton(
   val colors = MaterialTheme.colors
 
   val surfaceModifier = modifier
-    .padding(start = 8.dp, top = 8.dp, end = 8.dp)
-    .fillMaxWidth()
+      .padding(start = 8.dp, top = 8.dp, end = 8.dp)
+      .fillMaxWidth()
 
   Surface(
     modifier = surfaceModifier,
